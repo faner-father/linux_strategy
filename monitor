@@ -1,0 +1,34 @@
+i.磁盘使用
+df:disk free,即磁盘空闲;du:disk used,即磁盘使用.
+
+df:
+1.查看文件的磁盘使用
+du filename1 ...
+解析:
+默认以byte为单位
+查看文件夹下所以文件及子目录文件的大小
+du -a dir
+输出带大小代为比如k,M,G
+du -h dir
+输出总数
+du -c dir 
+输出所有,然后输出一个总数
+du -s dir 
+输出每个的总数
+通配符
+du -c a*
+
+2.找出10个最大的文件
+du -ak workspace/ |sort -nrk 1|head
+解析:
+du -ak workspace 输出目录下所有文件以k为单位
+sort -nrk 1
+排序du的输出行,递归比较,按照字符串数值的大小比较第一列
+head输出前10行
+
+ii.磁盘空闲
+df -h
+
+x
+1
+2

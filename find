@@ -1,0 +1,54 @@
+find命令:
+基本:该命令的用法可总结为,从某个目录为根,开始搜寻符合特定字符样式的文件和文件夹,然后执行某种动作.
+用法举例:
+1.find /home -name "*.txt" -print
+搜寻/home目录及子目录下以.txt结尾的文件(不含文件夹),打印它们
+find /home -iname "*.txt" -print
+iname为忽略大小写
+find /home -path "*lx*" -print
+搜寻路径名称中包含的文件或文件夹
+2.匹配多个条件
+find . \( -name "*.txt" -o -name "*.py" \) -print
+查询当前目录下后缀名为.txt或.py的文件,打印.
+注意:其中\( \)的作用是将两个-name条件合并成一个,前后都必须有空格;-o为或.
+3.正则匹配
+find -regex ".*\(\.txt\|.*\.py\)$"
+在当前目录下查询符合正则表达式的文件或文件夹.
+解析: ( ) |等特殊字符均需要转义字符,$为结束符.
+-iregex为忽略大小写的方式
+4.查找否定条件的文件
+find ! -name "*.txt"
+解析:查找后缀名不为.txt的文件
+5.指定搜索目录层级的起点和深度
+find -maxdepth 1 -type f -print0
+只打印当前目录下的所有文件,不打印下一级目录,-type f指定过滤类型为文件即不含文件夹
+6.过滤文件类型
+-type f/d/l/c/b/s/p 分别对应文件/文件夹/自负设备/快设备/socket/fifo
+
+示例:
+find -maxdepth 1 -name "*txt*" -type f -print
+仅查找当前目录下的匹配*txt*的文件,打印
+7.根据文件的访问时间atime/编辑时间mtime/修改时间ctime
+find -type f -atmie +1 -print
+解析:查找当前目录下一天以前被访问的文件,打印
+find -type f -atime 0 -print
+解析:查询今天被访问的文件
+-cmin -mmin -amin问分钟级别的
+8.根据文件大小查找
+find -type f -size +1k 
+查找当前目录下大于1k的文件
+9.删除动作
+find workspace/ -type f -size 0 -delete
+删除匹配条件的文件
+10.根据权限或者owner查询
+find -type f -perm 644
+解析:查询644权限的文件
+find -type f -user faner
+11.执行动作
+find -user root -exec printf "text :%s\n" {} \;
+查询属于root的文件按指定格式打印.其中{} \;为固定格式,为每行执行命令.
+12.忽略某个文件夹不搜索
+find workspace/ \( -name ".metadata" -prune \) -o \( -user root -print \)
+解析:
+打印workspace目录下所有属于root用户的文件,不包含.metadata
+  
