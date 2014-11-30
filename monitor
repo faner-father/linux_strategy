@@ -29,6 +29,10 @@ head输出前10行
 ii.磁盘空闲
 df -h
 
-x
-1
-2
+3.监控文件变化的时间
+inotifywait -m -r -e create,delete,move,access,modify,open,close,attrib ~/test_dir -q
+监控~/test_dir的增删改查访问等事件,持续输出到控制台.
+-m指定持续监控
+-r 指定recursive文件夹
+-e指定事件列表
+-q指定输出重点信息 
