@@ -1,0 +1,16 @@
+cut 
+名称：
+	在每行中删除选择内容
+
+用法：
+1.从文件中选择每行的第二列
+cut -f 2 sample_file
+注：默认分隔符为\tab
+2.以空格为分隔符
+cut -d ' ' -f 2,3-5 sample_file
+3.不包含不含分隔符的行
+cut -d ' ' -f 2 -s sample_file
+4.选择
+cut -f 2,3-5,8
+cut -f -10   #选择从开始到10
+cut -f -  #选择全部

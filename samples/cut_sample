@@ -1,0 +1,4 @@
+l1:	hey l1 	cmd run
+
+l2:	hello l2 	cmd2 stop
+l3	im l3  cmd3 destroy
